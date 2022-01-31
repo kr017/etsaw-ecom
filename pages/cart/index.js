@@ -31,9 +31,9 @@ const Cart = props => {
             <div>Total Price</div>
           </div>
           {cart.map(item => (
-            <div className={styles.body}>
+            <div className={styles.body} key={item.id}>
               <div className={styles.image}>
-                <img src={item.image} height="90" width="65" />
+                <img src={item.image} alt={item.name} height="90" width="65" />
               </div>
               <p>{item.name}</p>
               <p>$ {item.price}</p>

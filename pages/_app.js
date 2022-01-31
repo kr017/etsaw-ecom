@@ -10,8 +10,8 @@ function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
       <Head>
-        <title>I'm Poster | Home</title>
-      </Head>{" "}
+        <title>ETSAWECOM | Home</title>
+      </Head>
       <Script
         id="bootstrap-cdn"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
