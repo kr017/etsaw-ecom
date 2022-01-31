@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 1rem;
+}
+
+.logo {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+}
+
+.navlink {
+  list-style: none;
+  margin: 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.navlink a {
+  text-decoration: none;
+  color: black;
+}
+
+.navlink a:hover {
+  color: #f9826c;
+}
+
+.navbar span {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.navbar span:hover {
+  color: #f9826c;
+}

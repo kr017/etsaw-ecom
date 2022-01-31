@@ -1,0 +1,48 @@
+.pictureContainer {
+  width: 100%;
+}
+.picture {
+  position: relative;
+  width: 210px;
+  height: 280px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 0;
+  background: transparent;
+  text-transform: uppercase;
+  border: 2px solid #000000;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.filledbutton {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 0;
+  background: transparent;
+  text-transform: uppercase;
+  border: 2px solid black;
+  cursor: pointer;
+  background: #000000;
+  color: #ffffff;
+}
+.filledbutton:hover {
+  background: #ffffff;
+  color: #000000;
+}
