@@ -9,7 +9,13 @@ const Product = ({ product }) => {
   return (
     <Grid item style={{ margin: "0 auto" }}>
       <div className={styles}>
-        <img src={product.image} alt={product.name} height={300} width={220} />
+        <img
+          src={product.image}
+          alt={product.name}
+          height={300}
+          width={220}
+          style={{ objectFit: "cover" }}
+        />
         <div className={styles.title}>{product.name}</div>
         <div>$ {product.price}</div>
         {!isItemAdded(cart, product.id) ? (

@@ -1,4 +1,3 @@
-var Airtable = require("airtable");
 import axios from "axios";
 import { AIRTABLE_BASEID, AIRTABLE_KEY, API_URL } from "../config";
 

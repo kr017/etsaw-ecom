@@ -1,4 +1,6 @@
-import Router, { withRouter } from "next/router";
+import { Button } from "@material-ui/core";
+import { Send } from "@material-ui/icons";
+import Router, { useRouter, withRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   incrementQuantity,
@@ -6,7 +8,10 @@ import {
   removeFromCart,
 } from "../../redux/cart.slice";
 import styles from "../../styles/Cart.module.css";
+import { insertAddress } from "../api";
 const Cart = props => {
+  const router = useRouter();
+
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
@@ -15,6 +20,10 @@ const Cart = props => {
       (accumulator, item) => accumulator + item.quantity * item.price,
       0
     );
+  };
+
+  const handleNavigate = () => {
+    router.push("/address");
   };
   return (
     <div className={styles.container}>
@@ -33,7 +42,13 @@ const Cart = props => {
           {cart.map(item => (
             <div className={styles.body} key={item.id}>
               <div className={styles.image}>
-                <img src={item.image} alt={item.name} height="90" width="65" />
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  height="90"
+                  width="65"
+                  style={{ objectFit: "cover" }}
+                />
               </div>
               <p>{item.name}</p>
               <p>$ {item.price}</p>
@@ -53,6 +68,17 @@ const Cart = props => {
             </div>
           ))}
           <h2>Grand Total: $ {getTotalPrice()}</h2>
+
+          <Button
+            variant="contained"
+            endIcon={<Send />}
+            onClick={() => {
+              handleNavigate();
+              // router.push("/address");
+            }}
+          >
+            Procceed
+          </Button>
         </>
       )}
     </div>

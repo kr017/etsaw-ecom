@@ -1,0 +1,48 @@
+import { getResponse } from "../../utils";
+import { addressesTable, usersTable } from "../../airtable";
+export const insertAddress = async data => {
+  try {
+    const item = await addressesTable.create([
+      {
+        fields: {
+          name: "admin 2",
+          contact: "(223) 456-7890",
+          street: "MIDC Road2",
+          city: "Amravati",
+          state: "MH",
+          country: "IN",
+          pincode: 444904,
+          user_id: ["recfiVLAUwqqa2nAt"],
+        },
+      },
+    ]);
+    return getResponse(200, { msg: "address added!", data: item });
+  } catch (err) {
+    console.log(err);
+    return getResponse(500, { msg: "Something went wrong", err: err });
+  }
+};
+
+export const loginUser = async data => {
+  try {
+    let results = await usersTable
+      .select({
+        filterByFormula: `AND(
+          (email = '${data.email}'),
+          (password='${data.password}')
+        )`,
+      })
+      .all();
+    if (results) {
+      return getResponse(200, {
+        msg: "Logged in successful!!!",
+        data: results,
+      });
+    } else {
+      return getResponse(401, { msg: "please check your credentails" });
+    }
+  } catch (err) {
+    console.log(err);
+    return getResponse(500, { msg: "Something went wrong", err: err });
+  }
+};

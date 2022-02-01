@@ -6,3 +6,10 @@ export const isItemAdded = (list, id) => {
   }
   return false;
 };
+
+export const getResponse = (status, body) => {
+  return {
+    code: status,
+    body: JSON.stringify(body),
+  };
+};
