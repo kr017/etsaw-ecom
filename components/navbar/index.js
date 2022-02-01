@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 const Navbar = () => {
   const router = useRouter();
   const cart = useSelector(state => state.cart);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const getItemsCount = () => {
     return cart.reduce((accumulator, item) => accumulator + item.quantity, 0);
@@ -28,9 +29,11 @@ const Navbar = () => {
             <span className={styles.navlink}>Cart ({getItemsCount()})</span>
           </Link>
         </li>
-        <li className={styles.navlink} onClick={() => handleSignout()}>
-          <ExitToAppOutlined />
-        </li>
+        {user?.user && (
+          <li className={styles.navlink} onClick={() => handleSignout()}>
+            <ExitToAppOutlined />
+          </li>
+        )}
       </ul>
     </nav>
   );

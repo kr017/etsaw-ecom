@@ -25,12 +25,14 @@ const Login = props => {
     };
     loginUser(data).then(res => {
       let results = JSON.parse(res.body);
-      let userID = results.data[0].id;
-      let data = results.data[0].fields;
-      data.id = userID;
+      if (results && results.data) {
+        let userID = results.data[0].id;
+        let data = results.data[0].fields;
+        data.id = userID;
 
-      dispatch(setUser(data));
-      router.push("/");
+        dispatch(setUser(data));
+        router.push("/");
+      }
     });
   };
   return (

@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 import Router, { useRouter, withRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import withAuth from "../../components/withAuth";
 import {
   incrementQuantity,
   decrementQuantity,
@@ -85,4 +86,4 @@ const Cart = props => {
   );
 };
 
-export default withRouter(Cart);
+export default (withRouter, withAuth)(Cart);

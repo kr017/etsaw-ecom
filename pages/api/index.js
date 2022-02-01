@@ -4,16 +4,7 @@ export const insertAddress = async data => {
   try {
     const item = await addressesTable.create([
       {
-        fields: {
-          name: "admin 2",
-          contact: "(223) 456-7890",
-          street: "MIDC Road2",
-          city: "Amravati",
-          state: "MH",
-          country: "IN",
-          pincode: 444904,
-          user_id: ["recfiVLAUwqqa2nAt"],
-        },
+        fields: data,
       },
     ]);
     return getResponse(200, { msg: "address added!", data: item });
@@ -44,5 +35,28 @@ export const loginUser = async data => {
   } catch (err) {
     console.log(err);
     return getResponse(500, { msg: "Something went wrong", err: err });
+  }
+};
+
+export const getAddressList = async data => {
+  try {
+    console.log(data.id);
+    let results = await addressesTable
+      .select({
+        filterByFormula: `AND(
+          (user_id = '${data.id}')
+        )`,
+      })
+      .all();
+    if (results) {
+      return getResponse(200, {
+        msg: "Address List !!!",
+        data: results,
+      });
+    } else {
+      return getResponse(404, { msg: "No Data Found" });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };

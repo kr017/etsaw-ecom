@@ -1,11 +1,28 @@
-import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
-import { useRouter, withRouter } from "next/router";
 import { useRef, useState } from "react";
+import { useRouter, withRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import store from "../../redux/store";
+import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
+import AddCircleOutlinedIcon from "@material-ui/icons/AddCircleOutlined";
 import { DialogBox } from "../../components/dialogbox";
 import styles from "../../styles/Address.module.css";
+import { getAddressList, insertAddress } from "../api";
+import withAuth from "../../components/withAuth";
 
-// export const getStaticProps = params => {};
+export const getStaticProps = () => {
+  let user = store.getState();
+  console.log(user);
+  let data = [];
+  getAddressList({ id: user.user.id }).then(res => {
+    console.log(res);
+  });
+
+  return {
+    props: {
+      addresses: data,
+    },
+  };
+};
 
 const Address = props => {
   const router = useRouter();
@@ -21,7 +38,34 @@ const Address = props => {
   const zipInputRef = useRef();
   const cityInputRef = useRef();
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    let name = nameInputRef.current.value;
+    let contact = contactInputRef.current.value;
+    let street = streetInputRef.current.value;
+    let city = cityInputRef.current.value;
+    let pincode = parseInt(zipInputRef.current.value);
+    if (
+      name === "" ||
+      contact === "" ||
+      street === "" ||
+      city === "" ||
+      pincode === ""
+    ) {
+      alert("All fields are required");
+    } else {
+      let data = {
+        name,
+        contact,
+        street,
+        city,
+        pincode,
+        user_id: [user.user.id],
+      };
+      insertAddress(data).then(res => {
+        setOpen(false);
+      });
+    }
+  };
   const saveAddress = () => {
     return (
       <Button
@@ -47,6 +91,7 @@ const Address = props => {
             fullWidth
             placeholder="Name"
             inputRef={nameInputRef}
+            required
           />{" "}
           <TextField
             fullWidth
@@ -110,13 +155,14 @@ const Address = props => {
         </Grid>
       ) : (
         <Grid>
-          No Address Added
+          <h1> No Address Added!</h1>
+
           <div
             onClick={() => {
               setOpen(true);
             }}
           >
-            Add Now
+            <AddCircleOutlinedIcon color="secondary" fontSize="large" />
           </div>
         </Grid>
       )}
@@ -135,4 +181,4 @@ const Address = props => {
   );
 };
 
-export default withRouter(Address);
+export default (withRouter, withAuth)(Address);
