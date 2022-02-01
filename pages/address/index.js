@@ -88,7 +88,6 @@ const Address = props => {
             id="contactName"
             name="contactName"
             placeholder="Contact Name"
-            fullWidth
             placeholder="Name"
             inputRef={nameInputRef}
             required

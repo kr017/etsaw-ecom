@@ -43,7 +43,6 @@ const Login = props => {
           <TextField
             name="email"
             type="email"
-            className={styles.inputholder}
             required
             id="email"
             inputRef={emailInputRef}
